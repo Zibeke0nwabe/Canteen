@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register Admin</title>
+</head>
+<body>
+
+  <h1>Register Admin</h1>
+
+  <form action="/admin/register" method="POST">
+    <div>
+      <label for="email">Admin Email:</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+    <button type="submit">Register Admin</button>
+  </form>
+
+  <p><a href="/admin/login">Go to Admin Login</a></p>
+
+</body>
+</html>

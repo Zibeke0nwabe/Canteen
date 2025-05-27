@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Order Tracker - CANTEEN</title>
+</head>
+<body>
+  <h1>Your Orders</h1>
+  <% orders.forEach(order => { %>
+    <div>
+      <strong>Ref: <%= order.refCode %></strong><br>
+      Status: <%= order.status %><br>
+      <% if (!order.cancelStatus) { %>
+        <form method="POST" action="/cancel/<%= order._id %>">
+          <button type="submit">Cancel Order</button>
+        </form>
+      <% } else { %>
+        <p>Order Cancelled</p>
+      <% } %>
+    </div>
+    <hr>
+  <% }) %>
+</body>
+</html>

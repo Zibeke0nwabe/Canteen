@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register - CANTEEN</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center">
+
+  <div class="flex w-full max-w-5xl bg-white rounded-xl overflow-hidden">
+    <!-- Left Side Image -->
+    <div class="hidden lg:block w-1/2 relative">
+      <img src="images/item1.png" alt="Register" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white text-center px-6">
+        <h2 class="text-3xl font-bold mb-4"><i class="fas fa-utensils text-red-500"></i> CANTEEN</h2>
+        <p class="text-lg">Fast. Fresh. Easy registration in seconds.</p>
+      </div>
+    </div>
+
+    <!-- Right Side Register Form -->
+    <div class="w-full lg:w-1/2 p-8 sm:p-12">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+        <i class="fas fa-user-plus text-red-500"></i> Create an Account
+      </h2>
+      <p class="text-gray-600 mb-6">Register now to enjoy speedy service and delicious meals from CANTEEN.</p>
+
+      <form method="POST" action="/register" class="space-y-5">
+        <!-- Email -->
+        <div>
+          <label class="block mb-1 text-sm font-medium text-gray-700">Email</label>
+          <div class="flex items-center border border-gray-300 rounded px-3 py-2">
+            <i class="fas fa-envelope text-gray-400 mr-2"></i>
+            <input type="email" name="email" required class="w-full outline-none text-sm" placeholder="you@example.com" />
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div>
+          <label class="block mb-1 text-sm font-medium text-gray-700">Password</label>
+          <div class="flex items-center border border-gray-300 rounded px-3 py-2">
+            <i class="fas fa-lock text-gray-400 mr-2"></i>
+            <input type="password" name="password" required class="w-full outline-none text-sm" placeholder="Create a password" />
+          </div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div>
+          <label class="block mb-1 text-sm font-medium text-gray-700">Confirm Password</label>
+          <div class="flex items-center border border-gray-300 rounded px-3 py-2">
+            <i class="fas fa-lock text-gray-400 mr-2"></i>
+            <input type="password" name="confirmPassword" required class="w-full outline-none text-sm" placeholder="Repeat your password" />
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 transition flex justify-center items-center gap-2">
+          <i class="fas fa-user-plus"></i> Register
+        </button>
+      </form>
+
+      <!-- Login Prompt -->
+      <p class="text-sm text-center mt-6 text-gray-700">
+        Already have an account?
+        <a href="/login" class="text-red-600 hover:underline flex justify-center items-center gap-1 mt-2">
+          <i class="fas fa-sign-in-alt"></i> Login Here
+        </a>
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>
+
