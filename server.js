@@ -187,17 +187,28 @@ app.get('/admin', isAdmin, async (req, res) => {
   res.render('admin', { orders, items });
 });
 
-app.post('/admin/add-item', isAdmin, upload.single('image'), async (req, res) => {
+app.post('/admin/add-item', isAdmin, upload.single('imageFile'), async (req, res) => {
   const { name, description, price, category, imageURL } = req.body;
-  let imagePath = imageURL;
+  let imagePath = '';
 
   if (req.file) {
+    // If file was uploaded, use local path
     imagePath = '/uploads/' + req.file.filename;
+  } else if (imageURL && imageURL.trim() !== '') {
+    imagePath = imageURL.trim();
   }
 
-  await new Item({ name, description, price, category, image: imagePath }).save();
+  await new Item({
+    name,
+    description,
+    price,
+    category,
+    image: imagePath
+  }).save();
+
   res.redirect('/admin');
 });
+
 
 app.post('/admin/update-status/:id', isAdmin, async (req, res) => {
   await Order.findByIdAndUpdate(req.params.id, { status: req.body.status });

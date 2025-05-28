@@ -142,12 +142,13 @@
         <option value="desserts">Desserts</option>
         <option value="specials">Specials</option>
       </select>
+        <!-- Upload from device -->
+        <label class="block mb-1 font-medium text-gray-700">Upload Image (from your device)</label>
+        <input type="file" name="imageFile" accept="image/*" class="mb-3 block w-full text-sm text-gray-600 border rounded p-2">
 
-      <label class="block mb-1 font-medium text-gray-700">Upload Image (from your device)</label>
-      <input type="file" name="image" accept="image/*" class="mb-3 block w-full text-sm text-gray-600 border rounded p-2">
-
-      <label class="block mb-1 font-medium text-gray-700">OR Use Image URL</label>
-      <input type="url" name="image" placeholder="https://..." class="mb-4 block w-full p-2 border rounded">
+        <!-- OR enter image URL -->
+        <label class="block mb-1 font-medium text-gray-700">OR Use Image URL</label>
+        <input type="url" name="imageURL" placeholder="https://..." class="mb-4 block w-full p-2 border rounded">
 
       <div class="flex justify-end gap-3">
         <button type="button" onclick="closeModal()" class="px-4 py-2 border rounded">Cancel</button>
