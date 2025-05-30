@@ -156,23 +156,54 @@
     <!-- Cart Items -->
     <% if (cartItems && cartItems.length > 0) { %>
       <div class="bg-white rounded-lg p-6 space-y-6">
-        <ul class="space-y-4">
-          <% let totalAmount = 0; %>
-          <% cartItems.forEach(function(item) { %>
-            <li class="flex justify-between items-center border-b pb-3">
-              <div>
-                <img src="<%= item.image %>" alt="<%= item.name %>" class="w-40 items-center h-36 object-contain rounded-t-lg">
-                <h3 class="text-lg font-semibold"><%= item.name %></h3>
-                <p class="text-sm text-gray-600 mt-1"><%= item.description %></p>
-                <p class="text-sm text-gray-500">R <%= item.price %></p>
-              </div>
-              <% totalAmount += item.price; %>
-              <i class="fas fa-utensils text-red-500"></i>
-            </li>
-          <% }); %>
-        </ul>
+        <ul class="space-y-6" id="cart-items"><% 
+  let totalAmount = 0;
+  cartItems.forEach((item, index) => {
+    const quantity = item.quantity || 1;
+    const itemTotal = item.price * quantity;
+    totalAmount += itemTotal;
+%>
+  <li class="flex gap-6 border-b pb-6 items-center" data-index="<%= index %>">
+    <!-- Image -->
+    <img src="<%= item.image %>" alt="<%= item.name %>" class="w-36 h-36 object-contain rounded-md border" />
 
-        <div class="text-right text-xl font-bold text-red-600">Total: R <%= totalAmount %></div>
+    <!-- Item Details and Controls -->
+    <div class="flex-1 flex flex-col gap-2">
+      <div class="flex justify-between items-center">
+        <h3 class="text-lg font-semibold"><%= item.name %></h3>
+        <button class="text-red-500 hover:text-red-700 text-sm font-semibold remove-item">
+          <i class="fas fa-trash-alt"></i> Remove
+        </button>
+      </div>
+      <p class="text-sm text-gray-600"><%= item.description %></p>
+      <p class="text-sm text-gray-500">Price: R <%= item.price.toFixed(2) %></p>
+
+      <!-- Quantity Controls -->
+      <div class="flex items-center gap-2 mt-2">
+        <button 
+          class="px-2 py-1 border rounded disabled:opacity-50 disabled:cursor-not-allowed decrease-qty" 
+          <%= quantity <= 1 ? "disabled" : "" %>>
+          <i class="fas fa-minus"></i>
+        </button>
+        <input 
+          type="number" 
+          min="1" 
+          class="w-14 text-center border rounded quantity-input" 
+          value="<%= quantity %>" />
+        <button class="increase-qty px-2 py-1 border rounded">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+      <p class="text-sm mt-1 font-medium text-gray-700">Subtotal: R <span class="item-subtotal"><%= itemTotal.toFixed(2) %></span></p>
+    </div>
+  </li>
+<% }) %>
+</ul>
+
+<!-- Total -->
+<div class="text-right text-xl font-bold text-red-600 mt-4">
+  Total: R <span id="cart-total"><%= totalAmount.toFixed(2) %></span>
+</div>
 
         <div class="flex justify-between mt-6 gap-4 flex-wrap">
           <form action="/clear-cart" method="POST">
@@ -311,6 +342,63 @@
 
   setupDropdown('menu-dropdown', 'menu-dropdown-btn', 'menu-dropdown-menu', 'menu-dropdown-icon');
   setupDropdown('about-dropdown', 'about-dropdown-btn', 'about-dropdown-menu', 'about-dropdown-icon');
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const cartItems = document.getElementById("cart-items");
+    const totalEl = document.getElementById("cart-total");
+
+    function updateTotal() {
+      let total = 0;
+      cartItems.querySelectorAll("li").forEach(item => {
+        const subtotal = parseFloat(item.querySelector(".item-subtotal").textContent);
+        total += subtotal;
+      });
+      totalEl.textContent = total.toFixed(2);
+    }
+
+    cartItems.addEventListener("click", (e) => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+
+      const itemEl = btn.closest("li");
+      const qtyInput = itemEl.querySelector(".quantity-input");
+      let quantity = parseInt(qtyInput.value) || 1;
+      qtyInput.value = quantity; 
+      const price = parseFloat(itemEl.querySelector("p.text-sm.text-gray-500").textContent.replace("Price: R ", ""));
+
+      if (btn.classList.contains("increase-qty")) {
+        quantity++;
+      } else if (btn.classList.contains("decrease-qty") && quantity > 1) {
+        quantity--;
+      } else if (btn.classList.contains("remove-item")) {
+        itemEl.remove();
+        updateTotal();
+        return;
+      }
+
+      qtyInput.value = quantity;
+      itemEl.querySelector(".item-subtotal").textContent = (price * quantity).toFixed(2);
+      updateTotal();
+
+      // Update button state
+      itemEl.querySelector(".decrease-qty").disabled = quantity <= 1;
+    });
+
+    // On initial load: fix all subtotals
+    cartItems.querySelectorAll("li").forEach(item => {
+      const qtyInput = item.querySelector(".quantity-input");
+      const price = parseFloat(item.querySelector("p.text-sm.text-gray-500").textContent.replace("Price: R ", ""));
+      const quantity = parseInt(qtyInput.value) || 1;
+
+      qtyInput.value = quantity;
+      item.querySelector(".item-subtotal").textContent = (price * quantity).toFixed(2);
+      item.querySelector(".decrease-qty").disabled = quantity <= 1;
+    });
+
+    updateTotal();
+
+  });
 </script>
 
 </body>
