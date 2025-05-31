@@ -261,8 +261,8 @@
     <% items.forEach(item => { %>
       <div class="bg-white rounded-lg shadow hover:shadow-md border border-gray-100 hover:border-red-300 transition flex flex-col">
         <!-- Image -->
-        <div class="h-36 flex items-center justify-center rounded-t-lg">
-          <img src="<%= item.image %>" alt="<%= item.name %>" class="h-32 w-32 object-contain" />
+        <div class="flex items-center justify-center rounded-t-lg p-2">
+          <img src="<%= item.image %>" alt="<%= item.name %>" class="max-h-36 object-contain" />
         </div>
         <!-- Content -->
         <div class="p-4 flex flex-col flex-grow">
