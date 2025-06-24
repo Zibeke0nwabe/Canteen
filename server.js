@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 
 const connectDB = require('./config/db');
+const User = require('./models/User'); 
 
 const authRoutes = require('./routes/authRoutes');
 const adminRoutes = require('./routes/adminRoutes');
@@ -12,7 +13,8 @@ const itemRoutes = require('./routes/itemRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 
 const app = express();
-
+console.log('Starting express server…');
+app.get('/test', (req, res) => res.send('Test route works'));
 // Connect to MongoDB
 connectDB();
 
@@ -28,20 +30,19 @@ app.use(session({
   saveUninitialized: false
 }));
 
-// Initialize Cart Session
+
 app.use((req, res, next) => {
   if (!req.session.cart) req.session.cart = [];
   next();
 });
 
-// Mount Routes
+// Routes
 app.use(authRoutes);
 app.use(adminRoutes);
 app.use(itemRoutes);
 app.use('/', itemRoutes);
 app.use(orderRoutes);
-
-// 404 Fallback
+// 404 Handler
 app.use((req, res) => {
   res.status(404).send('Page Not Found');
 });

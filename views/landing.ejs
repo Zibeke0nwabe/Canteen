@@ -100,7 +100,19 @@
   <% } %>
 </section>
   </section>
-
+<!-- Pagination Controls -->
+<% if (totalPages > 1) { %>
+  <div class="flex justify-center mt-8 space-x-2">
+    <% for (let i = 1; i <= totalPages; i++) { %>
+      <a 
+        href="?page=<%= i %>" 
+        class="px-3 py-1 border rounded 
+        <%= i === currentPage ? 'bg-red-600 text-white' : 'bg-white text-red-600 border-red-500 hover:bg-red-100' %>">
+        <%= i %>
+      </a>
+    <% } %>
+  </div>
+<% } %>
   <!-- Login Modal -->
   <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
     <div class="bg-white text-black p-6 rounded shadow-lg w-full max-w-sm text-center">
@@ -222,7 +234,5 @@
     }
   });
 </script>
-
-
 </body>
 </html>

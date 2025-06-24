@@ -58,20 +58,14 @@
           <a href="/forgot" class="text-blue-600 hover:underline">Forgot Password?</a>
           <a href="/admin/login" class="text-gray-600 hover:underline">Login as Admin</a>
         </div>
-
+      <span id="login-error" class="text-red-600 text-sm block">
+        <%= error %>
+      </span>
         <!-- Submit -->
         <button type="submit" class="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 transition flex justify-center items-center gap-2">
           <i class="fas fa-sign-in-alt"></i> Login
         </button>
       </form>
-
-      <!-- Register -->
-      <p class="text-sm text-center mt-6 text-gray-700">
-        Don't have an account?
-        <a href="/register" class="text-red-600 hover:underline flex justify-center items-center gap-1 mt-2">
-          <i class="fas fa-user-plus"></i> Sign Up Here
-        </a>
-      </p>
     </div>
   </div>
 

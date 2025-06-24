@@ -8,4 +8,6 @@ router.get('/forgot', authController.renderForgot);
 router.post('/forgot', authController.forgot);
 router.get('/logout', authController.logout);
 
+router.get('/checkout', authController.checkout);
+
 module.exports = router;

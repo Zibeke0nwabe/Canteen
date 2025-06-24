@@ -11,16 +11,20 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-exports.renderLogin = (req, res) => res.render('login');
+exports.renderLogin = (req, res) => res.render('login',{ error: ''});
 
 exports.login = async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
-  if (!user || !(await bcrypt.compare(req.body.password, user.password))) {
-    return res.send('Invalid credentials');
+  const isValid = user && await bcrypt.compare(req.body.password, user.password);
+
+  if (!isValid) {
+    return res.render('login', { error: 'Invalid email or password' });
   }
+
   req.session.userId = user._id;
   res.redirect('/home');
 };
+
 
 exports.renderForgot = (req, res) => res.render('forgot');
 
@@ -41,4 +45,24 @@ exports.forgot = async (req, res) => {
   res.send('Code sent to your email.');
 };
 
+exports.checkout = async (req, res) => {
+   console.log('🔑 Checkout route reached, session.userId =', req.session.userId);
+  if (!req.session.userId) {
+    return res.redirect('/login');
+  }
+
+  const user = await User.findById(req.session.userId);
+  const cartItems = req.session.cart || [];
+  const cartTotal = cartItems.reduce((total, item) => {
+    const qty = item.quantity || 1;
+    return total + item.price * qty;
+  }, 0);
+
+  res.render('checkout', {
+    user,
+    cartTotal,
+  });
+};
+
 exports.logout = (req, res) => req.session.destroy(() => res.redirect('/'));
+

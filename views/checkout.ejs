@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout - Canteen</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen py-10">
+  <div class="max-w-2xl mx-auto bg-white p-8 rounded shadow">
+    <h1 class="text-2xl font-bold mb-6 text-red-600">Checkout</h1>
+
+    <!-- Cart Total -->
+    <div class="mb-6">
+      <p class="text-lg font-medium text-gray-700">Cart Total: <span class="text-black font-bold">R <%= cartTotal.toFixed(2) %></span></p>
+      <p class="text-sm text-gray-500 mt-1">Your Credit Balance: <strong class="text-green-600">R <%= user?.voucher?.amount?.toFixed(2) || 0 %></strong></p>
+    </div>
+
+    <!-- Payment Options -->
+    <h2 class="text-lg font-semibold mb-3">Select Payment Method:</h2>
+
+    <!-- Voucher Payment -->
+    <% if (user.voucher.amount >= cartTotal) { %>
+      <form action="/pay/voucher" method="POST" class="mb-4">
+        <button class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition">
+          Pay with Credit (R <%= user.voucher.amount.toFixed(2) %>)
+        </button>
+      </form>
+    <% } else { %>
+      <div class="mb-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-3 rounded">
+        <p>Not enough credit to cover total. You have <strong>R <%= user.voucher.amount.toFixed(2) %></strong>.</p>
+      </div>
+    <% } %>
+
+    <!-- Cash Payment -->
+    <form action="/pay/cash" method="POST" class="mb-4">
+      <button class="w-full bg-yellow-500 text-white py-2 rounded hover:bg-yellow-600 transition">
+        Pay with Cash
+      </button>
+    </form>
+
+    <!-- Stripe Payment -->
+    <form action="/create-checkout-session" method="POST">
+      <button class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
+        Pay with Card (Stripe)
+      </button>
+    </form>
+
+    <!-- Back Link -->
+    <div class="mt-6 text-center">
+      <a href="/cart" class="text-blue-600 hover:underline text-sm">&larr; Back to Cart</a>
+    </div>
+  </div>
+</body>
+</html>
