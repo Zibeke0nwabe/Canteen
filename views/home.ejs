@@ -254,6 +254,15 @@
     <% } %>
   </div>
 <% } %>
+<% if (!category) { %>
+  <!-- About Us Section -->
+  <%- include('partials/about-section') %>
+  <!-- Contact Us Section -->
+  <%- include('partials/contact-section') %>
+<% } %>
+<% if (!category) { %>
+  <%- include('partials/footer') %>
+<% } %>
 </body>
 <!-- Carousel JavaScript -->
 <script>
