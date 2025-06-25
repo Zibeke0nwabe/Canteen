@@ -19,9 +19,9 @@ mongoose.connect(process.env.MONGODB_URI, {
         }
       }
     );
-    console.log(`✅ Updated ${result.modifiedCount} users with voucher`);
+    console.log(` Updated ${result.modifiedCount} users with voucher`);
     mongoose.disconnect();
   })
   .catch(err => {
-    console.error('❌ Failed to update users:', err);
+    console.error('Failed to update users:', err);
   });

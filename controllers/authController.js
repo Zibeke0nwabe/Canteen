@@ -2,6 +2,7 @@ const User = require('../models/User');
 const Admin = require('../models/Admin');
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
+const Item = require('../models/Item');
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -46,23 +47,37 @@ exports.forgot = async (req, res) => {
 };
 
 exports.checkout = async (req, res) => {
-   console.log('🔑 Checkout route reached, session.userId =', req.session.userId);
+  console.log('Checkout route reached, session.userId =', req.session.userId);
   if (!req.session.userId) {
     return res.redirect('/login');
   }
-
+ const cartCount = req.session.cart?.length || 0;
   const user = await User.findById(req.session.userId);
-  const cartItems = req.session.cart || [];
-  const cartTotal = cartItems.reduce((total, item) => {
-    const qty = item.quantity || 1;
-    return total + item.price * qty;
+  const cart = req.session.cart || [];
+
+  const itemIds = cart.map(item => item.itemId);
+  const items = await Item.find({ _id: { $in: itemIds } });
+
+  const cartItems = items.map(item => {
+    const cartEntry = cart.find(c => c.itemId.toString() === item._id.toString());
+    return {
+      ...item.toObject(),
+      quantity: cartEntry?.quantity || 1
+    };
+  });
+
+  const totalAmount = cartItems.reduce((total, item) => {
+    return total + item.price * item.quantity;
   }, 0);
 
   res.render('checkout', {
     user,
-    cartTotal,
+    cartItems,
+    cartCount,
+    totalAmount,
   });
 };
+
 
 exports.logout = (req, res) => req.session.destroy(() => res.redirect('/'));
 
