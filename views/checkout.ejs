@@ -35,9 +35,9 @@
       <div class="w-full md:w-1/2">
         <h2 class="text-xl font-semibold mb-4">Choose Payment Method</h2>
 
-        <!-- Payment Options -->
+        <!-- Payment Form -->
         <form id="payment-form" method="POST">
-          <!-- Payment Selection -->
+          <!-- Payment Options -->
           <div class="space-y-4 mb-6">
             <!-- Voucher Option -->
             <label class="block">
@@ -51,7 +51,8 @@
             <!-- Card Option -->
             <label class="block">
               <input type="radio" name="paymentMethod" value="card" class="mr-2">
-              <strong>Card</strong> <img src="https://websitespeedycdn.b-cdn.net/speedyweb/images/stripe-badge-transparent.webp" alt="Stripe" class="inline h-7 ml-2">
+              <strong>Card</strong> 
+              <img src="https://websitespeedycdn.b-cdn.net/speedyweb/images/stripe-badge-transparent.webp" alt="Stripe" class="inline h-7 ml-2">
             </label>
 
             <!-- Cash Option -->
@@ -61,7 +62,7 @@
             </label>
           </div>
 
-          <!-- Conditional Sections -->
+          <!-- Voucher Section -->
           <div id="voucher-info" class="mb-6">
             <% if (user.voucher.amount >= totalAmount) { %>
               <p class="text-green-700">Your voucher covers the total. It will be deducted automatically.</p>
@@ -70,7 +71,21 @@
             <% } %>
           </div>
 
+          <!-- Card Section -->
           <div id="card-info" class="mb-6 hidden">
+            <label class="block mb-2 font-medium">Card Type</label>
+            <select name="cardType" class="border p-2 w-full mb-4">
+              <option value="visa">Visa</option>
+              <option value="mastercard">MasterCard</option>
+              <option value="amex">American Express</option>
+            </select>
+
+            <div class="flex items-center gap-4 mb-4">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa" class="h-6">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png" alt="MasterCard" class="h-8">
+              <img src="https://th.bing.com/th/id/OIP.owHTF75SyqIQi-RPKf22sAHaFj?w=199&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="Amex" class="h-8">
+            </div>
+
             <label class="block mb-2 font-medium">Card Details</label>
             <input type="text" name="cardName" placeholder="Name on Card" class="border p-2 w-full mb-3" required>
             <input type="text" name="cardNumber" placeholder="Card Number" class="border p-2 w-full mb-3" required>
@@ -81,15 +96,16 @@
             <p class="text-sm text-gray-600 mt-2">Payments securely handled by Stripe.</p>
           </div>
 
+          <!-- Cash Section -->
           <div id="cash-info" class="mb-6 hidden">
-                You’ve selected <strong>Pay at the Counter</strong>. Payment will be required when you collect your order. 
-                You can pay using <strong>cash</strong> or <strong>card</strong> at the collection point.
+            You’ve selected <strong>Pay at the Counter</strong>. Payment will be required when you collect your order. 
+            You can pay using <strong>cash</strong> or <strong>card</strong> at the collection point.
           </div>
 
-          <!-- Pay Button -->
+          <!-- Submit Button -->
           <button type="submit"
             class="mt-4 w-full py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded">
-            Pay Now
+            Buy Now
           </button>
         </form>
       </div>
