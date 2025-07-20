@@ -103,3 +103,4 @@ exports.homeByCategory = async (req, res) => {
     totalPages: Math.ceil(totalItems / ITEMS_PER_PAGE)
   });
 };
+

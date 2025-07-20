@@ -2,21 +2,41 @@ const Item = require('../models/Item');
 const Order = require('../models/Order');
 
 exports.addToCart = (req, res) => {
-  if (!req.session.cart.includes(req.body.itemId)) {
-    req.session.cart.push(req.body.itemId);
+  if (!req.session.cart) req.session.cart = [];
+
+  const existingItem = req.session.cart.find(item => item.itemId === req.body.itemId);
+
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    req.session.cart.push({ itemId: req.body.itemId, quantity: 1 });
   }
+
   res.redirect(req.headers.referer || '/');
 };
-
 exports.buyNow = (req, res) => {
-  req.session.buyNow = [req.body.itemId];
+  req.session.buyNow = [{ itemId: req.body.itemId, quantity: 1 }];
   res.redirect('/cart?mode=buy-now');
 };
 
 exports.viewCart = async (req, res) => {
-  const itemIds = req.query.mode === 'buy-now' ? req.session.buyNow : req.session.cart;
-  const cartItems = itemIds?.length ? await Item.find({ _id: { $in: itemIds } }) : [];
-  res.render('cart', { cartItems, cartCount: req.session.cart.length, user: req.session.userId });
+  const cartSession = req.query.mode === 'buy-now' ? req.session.buyNow : req.session.cart;
+  const itemIds = cartSession?.map(c => c.itemId) || [];
+  const items = itemIds.length ? await Item.find({ _id: { $in: itemIds } }) : [];
+
+  const cartItems = items.map(item => {
+    const cartEntry = cartSession.find(c => c.itemId === item._id.toString());
+    return {
+      ...item.toObject(),
+      quantity: cartEntry?.quantity || 1
+    };
+  });
+
+  res.render('cart', {
+    cartItems,
+    cartCount: cartSession?.length || 0,
+    user: req.session.userId
+  });
 };
 
 exports.placeOrder = async (req, res) => {

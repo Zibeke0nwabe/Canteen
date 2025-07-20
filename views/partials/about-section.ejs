@@ -1,57 +1,157 @@
-<!-- views/partials/about-section.ejs -->
-<section class="w-full mt-10" id="about">
-  <!-- CCI Canteen Section -->
-  <div id="about-company" class="bg-red-600 text-white py-16 px-4">
-    <div class=" flex flex-col md:flex-row items-center gap-12">
-      <!-- Image -->
-      <div class="md:w-1/2">
-        <img src="/images/logoCanteen.png" alt="CCI Canteen" class="rounded-lg  object-cover w-full max-h-96" />
-      </div>
+<!-- Section: Popular Delicious Burger -->
+<section class="w-full py-16 bg-white text-center">
+  <!-- Small Title -->
+  <p class="text-red-500 text-sm font-semibold uppercase mb-1">Popular Burger</p>
 
-      <!-- Text Content -->
-      <div  class="md:w-1/2 space-y-5">
-        <h2 class="text-3xl font-bold">About CCI Canteen</h2>
-        <p class="text-sm leading-relaxed">
-          <i class="fas fa-utensils mr-2 text-yellow-300"></i>
-          CCI Canteen was designed to reduce queues and modernize how staff access meals. It’s your smart solution to beat the lunch rush.
-        </p>
-        <p class="text-sm leading-relaxed">
-          <i class="fas fa-clock mr-2 text-yellow-300"></i>
-          Skip waiting — order in advance, track your meal in real-time, and enjoy food that’s hot and ready the moment you are.
-        </p>
-        <p class="text-sm leading-relaxed">
-          <i class="fas fa-mobile-alt mr-2 text-yellow-300"></i>
-          Access everything through our mobile-friendly platform, with an easy interface tailored for busy workdays.
-        </p>
+  <!-- Big Title -->
+  <h2 class="text-4xl md:text-5xl font-extrabold mb-12">
+    Popular Delicious Burger
+  </h2>
+
+  <!-- 4 Burger Cards -->
+  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+    <!-- Card 1 -->
+    <div class="bg-white rounded-lg shadow-sm flex flex-col justify-between items-center h-96 p-4 text-center">
+      <div class="w-full h-40 overflow-hidden">
+        <img src="https://th.bing.com/th/id/OIP.pXISUqqlNHdgvTnZ1NPRSQHaDt?w=349&h=174&c=7&r=0&o=7&pid=1.7&rm=3"
+          alt="Special Chicken Burger"
+          class="w-full h-full object-cover rounded-md">
+      </div>
+      <div class="mt-4">
+        <div class="text-yellow-400 text-sm mb-1">★★★★★</div>
+        <h3 class="text-lg font-semibold mb-1">Special Chicken Burger</h3>
+        <p class="text-red-600 font-bold">R55</p>
       </div>
     </div>
-  </div>
 
-  <!-- Developer Section -->
-  <div id="about-developers" class="bg-white py-16 px-4">
-    <div class=" flex flex-col md:flex-row items-center gap-12">
-      <!-- Text Content -->
-      <div class="md:w-1/2 space-y-5 text-gray-700">
-        <h2 class="text-2xl font-bold text-red-600">Powered by the Esgela Team</h2>
-        <p class="text-sm leading-relaxed">
-          <i class="fas fa-code text-red-500 mr-2"></i>
-          This project was crafted by the <strong>Esgela Team</strong> — a passionate group committed to digital innovation for social good.
-        </p>
-        <p class="text-sm leading-relaxed">
-          <i class="fas fa-user-graduate text-red-500 mr-2"></i>
-          Founded by <strong>Onwabe Zibeke</strong>, a software developer and CCI agent with a Bachelor’s degree in ICT from DUT (2022), Esgela aims to educate and uplift rural communities.
-        </p>
-        <p class="text-sm leading-relaxed">
-          <i class="fas fa-heart text-red-500 mr-2"></i>
-          Though not yet registered, Esgela is driven by the dream of teaching software development for free, starting in <strong>Port St. Johns</strong>.
-        </p>
+    <!-- Card 2 -->
+    <div class="bg-white rounded-lg shadow-sm flex flex-col justify-between items-center h-96 p-4 text-center">
+      <div class="w-full h-40 overflow-hidden">
+        <img src="https://th.bing.com/th/id/OIP.PB2ddjaYk-3f-zrmPw-FOAHaE7?w=291&h=194&c=7&r=0&o=7&pid=1.7&rm=3"
+          alt="Hot Chicken Burger"
+          class="w-full h-full object-cover rounded-md">
       </div>
+      <div class="mt-4">
+        <div class="text-yellow-400 text-sm mb-1">★★★★☆</div>
+        <h3 class="text-lg font-semibold mb-1">Hot Chicken Burger</h3>
+        <p class="text-red-600 font-bold">R50</p>
+      </div>
+    </div>
 
-      <!-- Logo / Image -->
-      <div class="md:w-1/2 flex justify-center">
-        <img src="/images/esgela.jpg" alt="Esgela Logo" class="w-60 h-auto object-contain rounded-md" />
+    <!-- Card 3 -->
+    <div class="bg-white rounded-lg shadow-sm flex flex-col justify-between items-center h-96 p-4 text-center">
+      <div class="w-full h-40 overflow-hidden">
+        <img src="https://th.bing.com/th/id/OIP.wWEep0Yip5Po_j95DQ3TLAHaFk?w=285&h=214&c=7&r=0&o=7&pid=1.7&rm=3"
+          alt="Regular Beef Burger"
+          class="w-full h-full object-cover rounded-md">
+      </div>
+      <div class="mt-4">
+        <div class="text-yellow-400 text-sm mb-1">★★★★☆</div>
+        <h3 class="text-lg font-semibold mb-1">Regular Beef Burger</h3>
+        <p class="text-red-600 font-bold">R45</p>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="bg-white rounded-lg shadow-sm flex flex-col justify-between items-center h-96 p-4 text-center">
+      <div class="w-full h-40 overflow-hidden">
+        <img src="https://tse4.mm.bing.net/th/id/OIP.ScvXVaPAKeNeC0s98mzJrAHaE7?rs=1&pid=ImgDetMain&o=7&rm=3"
+          alt="Delicious Burger Beef"
+          class="w-full h-full object-cover rounded-md">
+      </div>
+      <div class="mt-4">
+        <div class="text-yellow-400 text-sm mb-1">★★★★★</div>
+        <h3 class="text-lg font-semibold mb-1">Delicious Burger Beef</h3>
+        <p class="text-red-600 font-bold">R60</p>
       </div>
     </div>
   </div>
 </section>
 
+<!-- Section: Special Burger -->
+<section class="bg-black text-white py-20">
+  <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-12">
+    <!-- Left Content -->
+    <div class="md:w-1/2 space-y-4">
+      <!-- Top Text -->
+      <span class="inline-block bg-yellow-400 text-black font-bold px-4 py-1 rounded-full text-sm">50% OFF</span>
+
+      <!-- Main Titles -->
+      <h2 class="text-4xl md:text-5xl font-extrabold uppercase">Special Burger</h2>
+      <h3 class="text-xl text-yellow-400 font-semibold">Delicious Burger</h3>
+
+      <!-- Description -->
+      <p class="text-white/80 text-sm max-w-md leading-relaxed">
+        A double beef patty, layered with melted cheese, lettuce, tomato, and our signature spicy sauce. Get it before the timer runs out!
+      </p>
+        <div class="flex gap-6 mt-6">
+          <div class="bg-[#1c1c1c] text-center px-4 py-3 rounded-md">
+            <p id="days" class="text-3xl font-bold">00</p>
+            <span class="text-xs text-white/60">Days</span>
+          </div>
+          <div class="bg-[#1c1c1c] text-center px-4 py-3 rounded-md">
+            <p id="hours" class="text-3xl font-bold">00</p>
+            <span class="text-xs text-white/60">Hours</span>
+          </div>
+          <div class="bg-[#1c1c1c] text-center px-4 py-3 rounded-md">
+            <p id="minutes" class="text-3xl font-bold">00</p>
+            <span class="text-xs text-white/60">Mins</span>
+          </div>
+          <div class="bg-[#1c1c1c] text-center px-4 py-3 rounded-md">
+            <p id="seconds" class="text-3xl font-bold">00</p>
+            <span class="text-xs text-white/60">Secs</span>
+          </div>
+        </div>
+      <!-- Order Button (Orange with white text) -->
+      <button class="mt-6 bg-[#FF4500] border-2 border-[#FF4500] text-white hover:bg-transparent hover:text-[#FF4500] font-bold px-6 py-3 rounded-full transition duration-300">
+        Order Now
+      </button>
+    </div>
+
+    <!-- Right Image -->
+    <div class="md:w-1/2">
+      <img src="/images/burger.PNG" alt="Special Burger" class="w-full h-auto object-contain">
+    </div>
+  </div>
+</section>
+
+<script>
+  function startCountdown(endTime) {
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+
+    function updateTimer() {
+      const now = new Date().getTime();
+      const distance = endTime - now;
+
+      if (distance < 0) {
+        clearInterval(interval);
+        daysEl.innerText = "00";
+        hoursEl.innerText = "00";
+        minutesEl.innerText = "00";
+        secondsEl.innerText = "00";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      daysEl.innerText = String(days).padStart(2, '0');
+      hoursEl.innerText = String(hours).padStart(2, '0');
+      minutesEl.innerText = String(minutes).padStart(2, '0');
+      secondsEl.innerText = String(seconds).padStart(2, '0');
+    }
+
+    updateTimer(); // Run immediately
+    const interval = setInterval(updateTimer, 1000);
+  }
+
+  // Set the deadline (e.g., 7 days from now)
+  const deadline = new Date();
+  deadline.setDate(deadline.getDate() + 7); // 7 days from now
+  startCountdown(deadline.getTime());
+</script>

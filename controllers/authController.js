@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const User = require('../models/User');
 const Admin = require('../models/Admin');
 const bcrypt = require('bcrypt');
@@ -47,28 +48,26 @@ exports.forgot = async (req, res) => {
 };
 
 exports.checkout = async (req, res) => {
-  console.log('Checkout route reached, session.userId =', req.session.userId);
-  if (!req.session.userId) {
-    return res.redirect('/login');
-  }
- const cartCount = req.session.cart?.length || 0;
+  if (!req.session.userId) return res.redirect('/login');
+
   const user = await User.findById(req.session.userId);
   const cart = req.session.cart || [];
 
-  const itemIds = cart.map(item => item.itemId);
+ 
+  const itemIds = cart.map(c => mongoose.Types.ObjectId(c.itemId));
+
   const items = await Item.find({ _id: { $in: itemIds } });
 
   const cartItems = items.map(item => {
-    const cartEntry = cart.find(c => c.itemId.toString() === item._id.toString());
+    const cartEntry = cart.find(c => c.itemId === item._id.toString());
     return {
       ...item.toObject(),
-      quantity: cartEntry?.quantity || 1
+      quantity: cartEntry?.quantity || 1,
     };
   });
 
-  const totalAmount = cartItems.reduce((total, item) => {
-    return total + item.price * item.quantity;
-  }, 0);
+  const totalAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  const cartCount = cartItems.length;
 
   res.render('checkout', {
     user,
@@ -77,7 +76,6 @@ exports.checkout = async (req, res) => {
     totalAmount,
   });
 };
-
 
 exports.logout = (req, res) => req.session.destroy(() => res.redirect('/'));
 

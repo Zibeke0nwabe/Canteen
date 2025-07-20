@@ -11,7 +11,7 @@ const authRoutes = require('./routes/authRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const itemRoutes = require('./routes/itemRoutes');
 const orderRoutes = require('./routes/orderRoutes');
-const checkoutRoutes = require('./routes/checkoutRoutes');
+
 
 const app = express();
 console.log('Starting express server…');
@@ -42,7 +42,7 @@ app.use(authRoutes);
 app.use(adminRoutes);
 app.use('/', itemRoutes);
 app.use(orderRoutes);
-app.use(checkoutRoutes);
+
 // 404 Handler
 app.use((req, res) => {
   res.status(404).send('Page Not Found');
